@@ -14,7 +14,8 @@ user.add_movies('Titanic', 'Romance')
 print(user.movies)
 user.add_movies('Titanic', 'Drama')
 print(user.checking_for_duplicates())
-print(user.saving_to_file('Films.csv'))
+#print(user.saving_to_file('Films.csv'))
+print(user.load_file('Films.csv'))
 
 
 

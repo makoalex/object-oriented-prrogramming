@@ -1,4 +1,4 @@
-from csv import DictWriter, writer
+from csv import reader, writer
 
 from Movie import Movie
 
@@ -30,9 +30,15 @@ class User:
         return False
 
     def saving_to_file(self, name):
-        with open(name, 'w', encoding='utf8')as file:
+        with open(name, 'w', encoding='utf8', newline='')as file:
             csv_writer = writer(file)
             csv_writer.writerow(['NAME', 'GENRE', 'STATUS'])
             for movie in self.movies:
                 csv_writer.writerow([movie.name, movie.genre, movie.watched])
 
+    def load_file(self, name):
+        with open(name, 'r', encoding='utf-8') as file:
+            csv_reader = reader(file)
+            next(csv_reader)
+            for row in csv_reader:
+                print(row)
