@@ -1,12 +1,15 @@
-from csv import reader, writer
+import json
 
 from Movie import Movie
 
 
 class User:
+    user_list = []
+
     def __init__(self, name):
         self.name = name
         self.movies = []
+        User.user_list.append(self)
 
     def __repr__(self):
         return " <User {}>".format(self.name)
@@ -20,6 +23,11 @@ class User:
         film = Movie(name, genre, False)
         self.movies.append(film)
 
+    def change_status(self, name):
+        for movie in self.movies:
+            if movie.name.lower() == name:
+                movie.watched = True
+
     def delete_movie(self, name):
         self.movies = list(filter(lambda movie: movie.name.lower() != name.lower(), self.movies))
 
@@ -29,16 +37,18 @@ class User:
                 return self.movies.remove(movie)
         return False
 
-    def saving_to_file(self, name):
-        with open(name, 'w', encoding='utf8', newline='')as file:
-            csv_writer = writer(file)
-            csv_writer.writerow(['NAME', 'GENRE', 'STATUS'])
-            for movie in self.movies:
-                csv_writer.writerow([movie.name, movie.genre, movie.watched])
+    def data_to_json(self):
+        return {
+            'movies': [movie.json() for movie in self.movies]
+        }
 
-    def load_file(self, name):
-        with open(name, 'r', encoding='utf-8') as file:
-            csv_reader = reader(file)
-            next(csv_reader)
-            for row in csv_reader:
-                print(row)
+    def file(self, name):
+        with open(name, 'w') as file:
+            json.dump(self.data_to_json(), file)
+
+    @classmethod
+    def load_file(cls, name):
+        with open(name, 'r') as outfile:
+            data = json.load(outfile)
+            for d in data['movies']:
+                print("'Name:' {} 'Genre:' {}, 'Watched:' {} ".format(d['name'], d['genre'], d['watched']))
