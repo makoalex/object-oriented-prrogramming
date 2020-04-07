@@ -15,7 +15,7 @@ print(user.movies)
 user.add_movies('Titanic', 'Drama')
 print(user.checking_for_duplicates())
 print(user.movies)
-print(User.load_file('FilmList.txt'))
+print(user.file("FilmList.json"))
 print(user.movies)
 
 

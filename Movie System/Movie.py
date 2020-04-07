@@ -20,5 +20,3 @@ class Movie:
             'genre': self.genre,
             'watched': self.watched
         }
-    def json_data(self):
-        return(Movie())

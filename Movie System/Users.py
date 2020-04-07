@@ -25,7 +25,7 @@ class User:
 
     def change_status(self, name):
         for movie in self.movies:
-            if movie.name.lower() == name:
+            if movie.name.lower() == name.lower():
                 movie.watched = True
 
     def delete_movie(self, name):
@@ -39,6 +39,7 @@ class User:
 
     def data_to_json(self):
         return {
+            'name': self.name,
             'movies': [movie.json() for movie in self.movies]
         }
 
@@ -47,8 +48,13 @@ class User:
             json.dump(self.data_to_json(), file)
 
     @classmethod
-    def load_file(cls, name):
-        with open(name, 'r') as outfile:
-            data = json.load(outfile)
-            for d in data['movies']:
-                print("'Name:' {} 'Genre:' {}, 'Watched:' {} ".format(d['name'], d['genre'], d['watched']))
+    def load_file(cls, data):
+        user = User(data['name'])
+        movies = []
+        for d in data['movies']:
+            movie_data = Movie(d['name'], d['genre'], d['watched'])
+            movies.append(movie_data)
+            print("'Name:' {} 'Genre:' {}, 'Watched:' {} ".format(d['name'], d['genre'], d['watched']))
+        user.movies = movies
+        return user
+
