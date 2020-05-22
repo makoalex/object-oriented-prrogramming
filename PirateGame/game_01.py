@@ -1,10 +1,11 @@
 import datetime
 import os
-from game_02_content import leave_port, sell, buy, transfer_bank
+
+from game_02_content import visit_bank, leave_port, sell, buy, transfer_warehouse, cities, current_city
+
 MENU_SEPARATOR = '---------------------------'
 GAME_START = 'Let the games begin!!'
 Date = datetime.date(1850, 4, 13)
-
 
 
 def welcome():
@@ -14,6 +15,7 @@ def welcome():
 def firm_name():
     firm_name = input('What will you name your firm? \n')
     return firm_name
+
 
 def start_option():
     starting_option = input(
@@ -31,7 +33,6 @@ def start_option():
     return cash, debt, guns
 
 
-
 # GAME START
 welcome()
 firm_name = firm_name()
@@ -46,18 +47,30 @@ while True:
 
     print('Firm: {}'.format(firm_name))
     print('Date: {}'.format(Date))
+    print(current_city['name'])
     print('cash: {}\ndebt: {}\nguns: {}'.format(cash, debt, guns))
     print(MENU_SEPARATOR)
-    print('WHAT WILL YOU CHOSE NOW?:\nL)eave Port\nS)ell\nB)uy\nV)isit the Money Lender\nT)ransfer Bank\nQ)uit')
-    new_option = input('enter the next step of your journey')
+
+    has_bank = ''
+    if current_city['has_bank']:
+        has_bank = 'V)isit Bank'
+        print('WHAT WILL YOU CHOSE NEXT?\nL)eave Port\nS)ell\n{}\nB)uy\nT)ransfer Bank\nQ)uit'.format(has_bank))
+    else:
+        print('WHAT WILL YOU CHOSE NEXT?\nL)eave Port\nS)ell\nV)isit Bank\nB)uy\nT)ransfer Bank\nQ)uit')
+    print(MENU_SEPARATOR)
+    new_option = input('enter the next step of your journey\n')
 
     if new_option == 'L'.lower():
-        leave_port()
+        current_city = leave_port(cities)
     elif new_option == 'S'.lower():
         sell()
     elif new_option == 'B'.lower():
         buy()
+    elif new_option == 'V'.lower() and current_city['has bank']:
+        visit_bank()
     elif new_option == 'T'.lower():
-        transfer_bank()
+        transfer_warehouse()
     elif new_option == 'Q'.lower():
+        print('See you around')
         break
+

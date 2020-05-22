@@ -1,5 +1,18 @@
-def leave_port():
-    pass
+cities = (
+    {'name': 'Hong Kong', 'has_bank': True, 'has_warehouse': True},
+    {'name': 'Sanghai', 'has_bank': False, 'has_warehouse': True},
+    {'name': 'Taiwan', 'has_bank': False, 'has_warehouse': False}
+)
+current_city = cities[0]
+
+
+def leave_port(city_list):
+    i = 1
+    for city in city_list:
+        print('{}. {}'.format(i, city['name']))
+        i += 1
+    selected_city = input('Where to matey?\n')
+    return city_list[int(selected_city)-1]
 
 
 def sell():
@@ -10,5 +23,13 @@ def buy():
     input('what would you like to buy\n')
 
 
-def transfer_bank():
+def transfer_warehouse():
     pass
+
+
+def visit_bank():
+    pass
+
+#
+# def current_city(name):
+#     current_city = {'has_bank': True, 'has_warehouse': True, name: True}
