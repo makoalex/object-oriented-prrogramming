@@ -1,11 +1,12 @@
 import datetime
 import os
-
 from game_02_content import visit_bank, leave_port, sell, buy, transfer_warehouse, cities, current_city
 
 MENU_SEPARATOR = '---------------------------'
 GAME_START = 'Let the games begin!!'
-Date = datetime.date(1850, 4, 13)
+
+
+
 
 
 def welcome():
@@ -38,6 +39,7 @@ welcome()
 firm_name = firm_name()
 cash, debt, guns = start_option()
 print('\n' * 10)
+date = datetime.datetime(1850, 4, 13)
 while True:
     os.system('cls')
     # MAIN GAME INTERFACE
@@ -46,7 +48,7 @@ while True:
     print(MENU_SEPARATOR)
 
     print('Firm: {}'.format(firm_name))
-    print('Date: {}'.format(Date))
+    print('Date: {:%B %d, %Y}'.format(date))
     print(current_city['name'])
     print('cash: {}\ndebt: {}\nguns: {}'.format(cash, debt, guns))
     print(MENU_SEPARATOR)
@@ -61,7 +63,8 @@ while True:
     new_option = input('enter the next step of your journey\n')
 
     if new_option == 'L'.lower():
-        current_city = leave_port(cities)
+        current_city, date = leave_port(cities, date)
+
     elif new_option == 'S'.lower():
         sell()
     elif new_option == 'B'.lower():

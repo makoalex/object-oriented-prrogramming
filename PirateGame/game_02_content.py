@@ -1,3 +1,5 @@
+import datetime
+
 cities = (
     {'name': 'Hong Kong', 'has_bank': True, 'has_warehouse': True},
     {'name': 'Sanghai', 'has_bank': False, 'has_warehouse': True},
@@ -5,14 +7,14 @@ cities = (
 )
 current_city = cities[0]
 
-
-def leave_port(city_list):
+def leave_port(city_list, date):
     i = 1
     for city in city_list:
         print('{}. {}'.format(i, city['name']))
         i += 1
     selected_city = input('Where to matey?\n')
-    return city_list[int(selected_city)-1]
+    date = date + datetime.timedelta(days=1)
+    return city_list[int(selected_city) - 1], date
 
 
 def sell():
