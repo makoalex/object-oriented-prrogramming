@@ -1,16 +1,16 @@
 import datetime
+from Cities import City
+# cities = (
+#     {'name': 'Hong Kong', 'has_bank': True, 'has_warehouse': True},
+#     {'name': 'Sanghai', 'has_bank': False, 'has_warehouse': True},
+#     {'name': 'Taiwan', 'has_bank': False, 'has_warehouse': False}
+# )
 
-cities = (
-    {'name': 'Hong Kong', 'has_bank': True, 'has_warehouse': True},
-    {'name': 'Sanghai', 'has_bank': False, 'has_warehouse': True},
-    {'name': 'Taiwan', 'has_bank': False, 'has_warehouse': False}
-)
-current_city = cities[0]
 
 def leave_port(city_list, date):
     i = 1
     for city in city_list:
-        print('{}. {}'.format(i, city['name']))
+        print('{}. {}'.format(i, city.name))
         i += 1
     selected_city = input('Where to matey?\n')
     date = date + datetime.timedelta(days=1)
