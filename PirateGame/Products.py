@@ -20,4 +20,4 @@ class Products:
         for product in self.products:
             print('Product name: {}-- Product price: {}--'.format(product.name, product.price))
 
-Products.create_products()
+

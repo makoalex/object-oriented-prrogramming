@@ -17,4 +17,4 @@ class City:
 
 
 
-City.create_cities()
+# City.create_cities()
