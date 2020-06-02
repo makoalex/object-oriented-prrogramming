@@ -13,11 +13,8 @@ class City:
         cls.cities.append(City('>Shanghai<', False, True))
         cls.cities.append(City('>Taipei<', False, False))
 
-    # def display_city(self):
-    #     for city in self.cities:
-    #         print(city.name)
+
 
 
 
 City.create_cities()
-# City.display_city(City)

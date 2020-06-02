@@ -65,7 +65,7 @@ while True:
         has_bank = 'V)isit Bank'
         print('WHAT WILL YOU CHOSE NEXT?\nL)eave Port\nS)ell\n{}\nB)uy\nT)ransfer Bank\nQ)uit'.format(has_bank))
     else:
-        print('WHAT WILL YOU CHOSE NEXT?\nL)eave Port\nS)ell\nV)isit Bank\nB)uy\nT)ransfer Bank\nQ)uit')
+        print('WHAT WILL YOU CHOSE NEXT?\nL)eave Port\nS)ell\nB)uy\nT)ransfer Bank\nQ)uit')
     print(MENU_SEPARATOR)
     new_option = input('enter the next step of your journey\n')
 
