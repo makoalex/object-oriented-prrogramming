@@ -16,7 +16,7 @@ class GameManager:
         self.guns = guns
         self.bank = 0
         self.cost=0
-        self.shiphold = shiphold
+        self.shiphold = 60
         City.create_cities()
         Products.create_products()
         self.current_city = City.cities[0]
@@ -51,13 +51,15 @@ class GameManager:
         self.cost = product_to_buy.price * int(quantity)
         print('it will cost {}'.format(self.cost))
 
-    def account_withdrawl(self):
-        answer = input('buy? Y/N\n')
-        if answer == 'Y'.lower():
+        answer = input('buy? y/n\n')
+        if answer == 'y' or answer == 'Y':
+            self.account_withdrawl(quantity)
+
+    def account_withdrawl(self, quantity):
             self.cash =self.cash - self.cost
-            return self.cash
-        else:
-            return
+            self.shiphold= self.shiphold- int(quantity)
+
+
 
     def balance_cash(self, product):
         balance = self.cash // product
@@ -83,6 +85,7 @@ class GameManager:
             print('Date: {:%B %d, %Y}'.format(game.date))
             print(game.current_city.name)
             print('cash: {}\ndebt: {}\nguns: {}'.format(game.cash, game.debt, game.guns))
+            print('Hold: {}'.format(self.shiphold))
             print('City Goods')
             Products.display_products(Products)
 
@@ -103,7 +106,7 @@ class GameManager:
                 self.sell()
             elif new_option == 'B'.lower():
                 self.buy()
-                self.account_withdrawl()
+                # self.account_withdrawl()
             elif new_option == 'V'.lower() and game.current_city.has_bank:
                 self.visit_bank()
             elif new_option == 'T'.lower():

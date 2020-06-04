@@ -1,4 +1,4 @@
-from game_manager import game, GameManager
+from game_manager import game
 
 
 # current_city = City.cities[0]
@@ -10,7 +10,7 @@ def welcome():
 
 def start_option():
     starting_option = input(
-        'would you like to start...\n 1) With cash (and a debt)\n >>or<<\n 2) Five guns and no cash...\n')
+        'would you like to start...\n    1) With cash (and a debt)\n>>or<<\n   2) Five guns and no cash...\n')
 
     if starting_option == '1':
         game.cash = game.cash
@@ -18,10 +18,11 @@ def start_option():
         game.guns = 0
 
     else:
-        game.cash =0
+        game.cash = 0
         game.guns = game.guns
         game.debt = 0
     return game.cash, game.debt, game.guns
+
 
 
 # GAME START

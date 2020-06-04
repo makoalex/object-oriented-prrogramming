@@ -25,5 +25,5 @@ class Products:
     def display_products(self):
         i = 1
         for product in self.products:
-            print('{} {}-- Product price: {}--'.format(i, product.name, self.price_HongK(product)))
+            print('{} {}-- Price: {}--'.format(i, product.name, self.price_HongK(product)))
             i += 1
