@@ -1,6 +1,6 @@
 import datetime
 import os
-
+from random import randint
 from Cities import City
 from Products import Products
 
@@ -9,10 +9,10 @@ GAME_START = 'Let the games begin!!'
 
 
 class GameManager:
-    def __init__(self, cash, guns, shiphold):
+    def __init__(self, cash, debt, guns, shiphold):
         self.firm_name
         self.cash = cash
-        self.debt = cash
+        self.debt = debt
         self.guns = guns
         self.bank = 0
         self.shiphold = shiphold
@@ -31,14 +31,24 @@ class GameManager:
             print('{}. {}'.format(i, city.name))
             i += 1
         selected_city = input('Where to matey?\n')
-        date = date + datetime.timedelta(days=1)
+        date = date + datetime.timedelta(days=30)
         return city_list[int(selected_city) - 1], date
 
     def sell(self):
         input('what would you like to sell?\n')
 
     def buy(self):
-        input('what would you like to buy\n')
+        selection_buy = input('What would you like to buy 1-{}/ C)ancel\n'.format(str(len(Products.products))))
+        if selection_buy == 'C':
+            return
+        product_to_buy = Products.products[int(selection_buy) - 1]
+        if product_to_buy == 3 or product_to_buy == 4:
+            quantity = input('How much {} would you like?\n'.format(product_to_buy.name))
+        else:
+            quantity=  input('How many {} would you like\n'.format(product_to_buy.name))
+        cost= product_to_buy.price * int(quantity)
+        print('it will cost {}'.format(cost))
+
 
     def transfer_warehouse(self):
         pass
@@ -75,6 +85,7 @@ class GameManager:
             new_option = input('enter the next step of your journey\n')
             if new_option == 'L'.lower():
                 game.current_city, game.date = self.leave_port(City.cities, game.date)
+                print('LEAVING PORT')
             elif new_option == 'S'.lower():
                 self.sell()
             elif new_option == 'B'.lower():
@@ -88,4 +99,4 @@ class GameManager:
                 game_running = False
 
 
-game = GameManager(400, 5, 100)
+game = GameManager(400, 1000, 5, 100)

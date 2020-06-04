@@ -13,11 +13,17 @@ class Products:
 
     @classmethod
     def create_products(cls):
-        Products.products.append(Products(' Basic Good', 5, 20))
-        Products.products.append(Products(' Arms', 30, 105))
+        Products.products.append(Products('Basic Goods', 10, 25))
+        Products.products.append(Products('Arms', 95, 180))
+        Products.products.append(Products('Opium', 5000, 12000))
+        Products.products.append(Products('Silk', 1250, 3300))
+
+    def price_HongK(self):
+        self.price = randint(self.minprice, self.maxprice)
+        return self.price
 
     def display_products(self):
+        i = 1
         for product in self.products:
-            print('Product name: {}-- Product price: {}--'.format(product.name, product.price))
-
-
+            print('{} {}-- Product price: {}--'.format(i, product.name, self.price_HongK(product)))
+            i += 1

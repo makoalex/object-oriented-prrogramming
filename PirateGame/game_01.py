@@ -14,7 +14,7 @@ def start_option():
 
     if starting_option == '1':
         game.cash = game.cash
-        game.debt = game.cash
+        game.debt = game.debt
         game.guns = 0
 
     else:
@@ -27,7 +27,7 @@ def start_option():
 # GAME START
 welcome()
 firm_name = game.firm_name()
-game.cash, game.debt, game.guns = start_option()
+start_option()
 game.StartUp()
 
 print('\n' * 10)

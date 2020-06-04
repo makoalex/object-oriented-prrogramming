@@ -10,8 +10,9 @@ class City:
     @classmethod
     def create_cities(cls):
         cls.cities.append(City('>Hong Kong<', True, True))
-        cls.cities.append(City('>Shanghai<', False, True))
+        cls.cities.append(City('>Shanghai<', False, False))
         cls.cities.append(City('>Taipei<', False, False))
+
 
 
 
