@@ -1,6 +1,6 @@
 import datetime
 import os
-from random import randint
+
 from Cities import City
 from Products import Products
 
@@ -15,6 +15,7 @@ class GameManager:
         self.debt = debt
         self.guns = guns
         self.bank = 0
+        self.cost=0
         self.shiphold = shiphold
         City.create_cities()
         Products.create_products()
@@ -39,16 +40,28 @@ class GameManager:
 
     def buy(self):
         selection_buy = input('What would you like to buy 1-{}/ C)ancel\n'.format(str(len(Products.products))))
+        product_to_buy = Products.products[int(selection_buy) - 1]
+        print('you can afford {}'.format(self.balance_cash(product_to_buy.price)))
         if selection_buy == 'C':
             return
-        product_to_buy = Products.products[int(selection_buy) - 1]
         if product_to_buy == 3 or product_to_buy == 4:
             quantity = input('How much {} would you like?\n'.format(product_to_buy.name))
         else:
-            quantity=  input('How many {} would you like\n'.format(product_to_buy.name))
-        cost= product_to_buy.price * int(quantity)
-        print('it will cost {}'.format(cost))
+            quantity = input('How many {} would you like\n'.format(product_to_buy.name))
+        self.cost = product_to_buy.price * int(quantity)
+        print('it will cost {}'.format(self.cost))
 
+    def account_withdrawl(self):
+        answer = input('buy? Y/N\n')
+        if answer == 'Y'.lower():
+            self.cash =self.cash - self.cost
+            return self.cash
+        else:
+            return
+
+    def balance_cash(self, product):
+        balance = self.cash // product
+        return balance
 
     def transfer_warehouse(self):
         pass
@@ -90,6 +103,7 @@ class GameManager:
                 self.sell()
             elif new_option == 'B'.lower():
                 self.buy()
+                self.account_withdrawl()
             elif new_option == 'V'.lower() and game.current_city.has_bank:
                 self.visit_bank()
             elif new_option == 'T'.lower():
