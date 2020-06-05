@@ -9,6 +9,7 @@ class Products:
         self.minprice = minprice
         self.maxprice = maxprice
         self.price = randint(self.minprice, self.maxprice)
+        self.product_quantity = 0
         # Products.products.append(self)
 
     @classmethod
@@ -22,8 +23,16 @@ class Products:
         self.price = randint(self.minprice, self.maxprice)
         return self.price
 
-    def display_products(self):
+    def display_products_prices(self):
         i = 1
         for product in self.products:
-            print('{} {}-- Price: {}--'.format(i, product.name, self.price_HongK(product)))
+            print('{} {}-- Price: {}'.format(i, product.name, self.price_HongK(product)))
             i += 1
+
+    def display_products_in_stock(self):
+        i = 1
+        for product in self.products:
+            print('{} {}-- Stock: {}'.format(i, product.name, product.product_quantity))
+            i += 1
+
+

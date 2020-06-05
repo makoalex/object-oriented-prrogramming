@@ -15,7 +15,7 @@ class GameManager:
         self.debt = debt
         self.guns = guns
         self.bank = 0
-        self.cost=0
+        self.cost = 0
         self.shiphold = 60
         City.create_cities()
         Products.create_products()
@@ -36,10 +36,30 @@ class GameManager:
         return city_list[int(selected_city) - 1], date
 
     def sell(self):
-        input('what would you like to sell?\n')
+        sell_selection = input('what would you like to sell?1- {} or C)ancel\n'.format(str(len(Products.products))))
+
+        if sell_selection == 'C':
+            return
+        product_to_sell = Products.products[int(sell_selection) - 1]
+        quantity_sell = int(input('How many pieces of {} would you like to sell?'.format(product_to_sell.name)))
+        print('you can sell {}'.format(product_to_sell.product_quantity))
+        if quantity_sell > product_to_sell.product_quantity:
+            print(' You said {}. Not enough units in hold'.format(quantity_sell))
+        else:
+            self.sell_shiphold(product_to_sell, quantity_sell)
+        self.stock_after_sell(product_to_sell, quantity_sell)
+
+    def sell_shiphold(self, product_sell, quantity):
+        total = product_sell.price * quantity
+        self.cash += total
+        print('Your transaction of {}'.format(total))
+        self.shiphold += quantity
+
+    def stock_after_sell(self, product, quantity):
+        product.product_quantity -= quantity
 
     def buy(self):
-        selection_buy = input('What would you like to buy 1-{}/ C)ancel\n'.format(str(len(Products.products))))
+        selection_buy = input('What would you like to buy? 1-{}/ C)ancel\n'.format(str(len(Products.products))))
         product_to_buy = Products.products[int(selection_buy) - 1]
         print('you can afford {}'.format(self.balance_cash(product_to_buy.price)))
         if selection_buy == 'C':
@@ -54,12 +74,18 @@ class GameManager:
         answer = input('buy? y/n\n')
         if answer == 'y' or answer == 'Y':
             self.account_withdrawl(quantity)
+            self.stock(quantity, product_to_buy)
 
     def account_withdrawl(self, quantity):
-            self.cash =self.cash - self.cost
-            self.shiphold= self.shiphold- int(quantity)
+        self.cash = self.cash - self.cost
+        self.shiphold = self.shiphold - int(quantity)
+        if self.shiphold > 60:
+            print('Hold: {} Overload'.format(self.shiphold))
 
-
+    def stock(self, quantity, product_bought):
+        product_bought.product_quantity += int(quantity)
+        for product in Products.products:
+            print('{} {}'.format(product.name, product.product_quantity))
 
     def balance_cash(self, product):
         balance = self.cash // product
@@ -86,8 +112,10 @@ class GameManager:
             print(game.current_city.name)
             print('cash: {}\ndebt: {}\nguns: {}'.format(game.cash, game.debt, game.guns))
             print('Hold: {}'.format(self.shiphold))
+            Products.display_products_in_stock(Products)
+
             print('City Goods')
-            Products.display_products(Products)
+            Products.display_products_prices(Products)
 
             print(MENU_SEPARATOR)
 
