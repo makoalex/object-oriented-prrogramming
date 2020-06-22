@@ -1,4 +1,5 @@
 from random import randint
+import sys
 
 
 class Products:
@@ -10,6 +11,7 @@ class Products:
         self.maxprice = maxprice
         self.price = randint(self.minprice, self.maxprice)
         self.product_quantity = 0
+        self.warehouse = 10000
         # Products.products.append(self)
 
     @classmethod
@@ -26,13 +28,14 @@ class Products:
     def display_products_prices(self):
         i = 1
         for product in self.products:
-            print('{} {}-- Price: {}'.format(i, product.name, self.price_HongK(product)))
+            print('{}. {}: Price: {}  //'.format(i, product.name, self.price_HongK(product)), end= "")
+
             i += 1
 
     def display_products_in_stock(self):
         i = 1
         for product in self.products:
-            print('{} {}-- Stock: {}'.format(i, product.name, product.product_quantity))
+            print('    {} {}-- Stock: {}'.format(i, product.name, product.product_quantity))
             i += 1
 
 

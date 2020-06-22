@@ -5,7 +5,7 @@ from game_manager import game
 
 
 def welcome():
-    print('Taipan! Welcome')
+    print('Pirate mania! Welcome')
 
 
 def start_option():

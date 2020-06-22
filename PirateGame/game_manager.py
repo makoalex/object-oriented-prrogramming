@@ -17,6 +17,7 @@ class GameManager:
         self.bank = 0
         self.cost = 0
         self.shiphold = 60
+        self.current_shiphold = 0
         City.create_cities()
         Products.create_products()
         self.current_city = City.cities[0]
@@ -68,19 +69,37 @@ class GameManager:
             quantity = input('How much {} would you like?\n'.format(product_to_buy.name))
         else:
             quantity = input('How many {} would you like\n'.format(product_to_buy.name))
-        self.cost = product_to_buy.price * int(quantity)
+
+        available_space = self.check_freespace_in_shiphold(quantity)
+        if available_space != quantity:
+            print("Whooops! You don't have space for that much. You can buy: {}".format(available_space))
+
+        self.cost = product_to_buy.price * int(available_space)
         print('it will cost {}'.format(self.cost))
 
-        answer = input('buy? y/n\n')
-        if answer == 'y' or answer == 'Y':
-            self.account_withdrawl(quantity)
-            self.stock(quantity, product_to_buy)
+        answer1 = input('buy? y/n\n')
+        if answer1 == 'y' or answer1 == 'Y':
+            self.account_withdrawl(available_space)
+            self.stock(available_space, product_to_buy)
 
     def account_withdrawl(self, quantity):
-        self.cash = self.cash - self.cost
-        self.shiphold = self.shiphold - int(quantity)
-        if self.shiphold > 60:
-            print('Hold: {} Overload'.format(self.shiphold))
+        if self.cost > self.cash:
+            print('Sorry not enough money')
+            reply = (input('would you like to sell?\n y/n\n'))
+            if reply == 'y':
+                print(self.sell())
+                answer = (input('Would you like to repurchase? y/N\n'))
+                if answer == 'y':
+                    print(self.buy())
+        else:
+            self.cash = self.cash - self.cost
+            self.shiphold = self.shiphold - int(quantity)
+
+    def check_freespace_in_shiphold(self, quantity):
+        if self.current_shiphold + int(quantity) <= self.shiphold:
+            return quantity
+        else:
+            return self.shiphold - self.current_shiphold
 
     def stock(self, quantity, product_bought):
         product_bought.product_quantity += int(quantity)
@@ -96,6 +115,9 @@ class GameManager:
 
     def visit_bank(self):
         pass
+
+    # def pirate_bribe(self):
+    #     if new_option == 'L' and
 
     def StartUp(self):
         game_running = True
@@ -144,4 +166,4 @@ class GameManager:
                 game_running = False
 
 
-game = GameManager(400, 1000, 5, 100)
+game = GameManager(1000, 1000, 5, 100)

@@ -1,3 +1,4 @@
+
 class City:
     cities = []
 
@@ -5,6 +6,7 @@ class City:
         self.name = name
         self.has_bank = has_bank
         self.has_warehouse = has_warehouse
+        self.city_products = []
         # City.cities.update({'name': self.name, 'has_bank': self.has_bank, 'has_warehouse': self.has_warehouse})
 
     @classmethod
@@ -12,6 +14,8 @@ class City:
         cls.cities.append(City('>Hong Kong<', True, True))
         cls.cities.append(City('>Shanghai<', False, False))
         cls.cities.append(City('>Taipei<', False, False))
+
+
 
 
 
