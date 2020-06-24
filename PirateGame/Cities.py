@@ -20,14 +20,4 @@ class City:
 
 
 
-
-class CityProduct:
-    def __init__(self, city, product):
-        self.city = city
-        self.product = product
-        self.random_price_generator()
-
-    def random_price_generator(self):
-        self.price = random.randint(self.product.minprice, self.product.maxprice)
-
 # City.create_cities()
