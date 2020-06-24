@@ -1,11 +1,12 @@
 from random import randint
-import sys
+
 
 
 class Products:
     products = []
 
     def __init__(self, name, minprice, maxprice):
+        self.city_products = []
         self.name = name
         self.minprice = minprice
         self.maxprice = maxprice
@@ -21,14 +22,23 @@ class Products:
         Products.products.append(Products('Opium', 5000, 12000))
         Products.products.append(Products('Silk', 1250, 3300))
 
-    def price_HongK(self):
+
+
+class CityProduct(Products):
+    def __init__(self, city, product, name, minprice, maxprice):
+        super().__init__(name, minprice, maxprice)
+        self.city = city
+        self.product = product
+        self.price_pick()
+
+    def price_pick(self):
         self.price = randint(self.minprice, self.maxprice)
         return self.price
 
     def display_products_prices(self):
         i = 1
         for product in self.products:
-            print('{}. {}: Price: {}  //'.format(i, product.name, self.price_HongK(product)), end= "")
+            print('{}. {}: Price: {}  //'.format(i, product.name, self.price_pick(product)), end="")
 
             i += 1
 

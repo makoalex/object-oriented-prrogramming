@@ -1,8 +1,8 @@
 import datetime
 import os
-
+from random import randint
 from Cities import City
-from Products import Products
+from Products import Products, CityProduct
 
 MENU_SEPARATOR = '---------------------------'
 GAME_START = 'Let the games begin!!'
@@ -22,6 +22,8 @@ class GameManager:
         Products.create_products()
         self.current_city = City.cities[0]
         self.date = datetime.datetime(1850, 4, 13)
+
+
 
     def firm_name(self):
         self.firm_name = input('What will you name your firm? \n')
@@ -76,7 +78,6 @@ class GameManager:
 
         self.cost = product_to_buy.price * int(available_space)
         print('it will cost {}'.format(self.cost))
-
         answer1 = input('buy? y/n\n')
         if answer1 == 'y' or answer1 == 'Y':
             self.account_withdrawl(available_space)
@@ -134,10 +135,10 @@ class GameManager:
             print(game.current_city.name)
             print('cash: {}\ndebt: {}\nguns: {}'.format(game.cash, game.debt, game.guns))
             print('Hold: {}'.format(self.shiphold))
-            Products.display_products_in_stock(Products)
+            CityProduct.display_products_in_stock(CityProduct)
 
             print('City Goods')
-            Products.display_products_prices(Products)
+            CityProduct.display_products_prices(CityProduct)
 
             print(MENU_SEPARATOR)
 
@@ -148,6 +149,7 @@ class GameManager:
             else:
                 print('WHAT WILL YOU CHOSE NEXT?\nL)eave Port\nS)ell\nB)uy\nT)ransfer Bank\nQ)uit')
             print(MENU_SEPARATOR)
+            print('New prices available{}'.format(MENU_SEPARATOR))
             new_option = input('enter the next step of your journey\n')
             if new_option == 'L'.lower():
                 game.current_city, game.date = self.leave_port(City.cities, game.date)

@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="11cff08c-71df-4968-abdf-742240d7995c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/PirateGame.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PirateGame.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Cities.py" beforeDir="false" afterPath="$PROJECT_DIR$/Cities.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Products.py" beforeDir="false" afterPath="$PROJECT_DIR$/Products.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game_01.py" beforeDir="false" afterPath="$PROJECT_DIR$/game_01.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/game_manager.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
