@@ -9,7 +9,7 @@ GAME_START = 'Let the games begin!!'
 
 
 class GameManager:
-    def __init__(self, cash, debt, guns, shiphold):
+    def __init__(self, cash, debt, guns):
         self.firm_name
         self.cash = cash
         self.debt = debt
@@ -22,6 +22,21 @@ class GameManager:
         Products.create_products()
         self.current_city = City.cities[0]
         self.date = datetime.datetime(1850, 4, 13)
+
+    def money_lender(self):
+        if game.current_city == City.cities[0]:
+            choice = input('Would you like to visit the Money Lender? Y/N\n')
+            if choice == 'Y' or choice == 'y':
+                answer = input('Would you like to L)oan or R)epay debt?\n ')
+                if answer == 'L' or answer == 'l':
+                    sum_loaned = int(input('how much would you like to loan?\n'))
+                    self.cash += sum_loaned
+                    self.debt += sum_loaned
+                elif answer == 'R' or answer == 'r':
+                    sum_payed = int(input('How much would you like to repay?\n'))
+                    self.cash -= sum_payed
+                    self.debt -= sum_payed
+                return self.cash, self.debt
 
     def firm_name(self):
         self.firm_name = input('What will you name your firm? \n')
@@ -154,9 +169,11 @@ class GameManager:
             print(MENU_SEPARATOR)
             print('New prices available{}. Check the Market'.format(MENU_SEPARATOR))
             new_option = input('enter the next step of your journey\n')
+
             if new_option == 'L'.lower():
                 game.current_city, game.date = self.leave_port(City.cities, game.date)
                 self.debt_interest()
+                self.money_lender()
                 print('LEAVING PORT')
             elif new_option == 'S'.lower():
                 self.sell()
@@ -172,4 +189,4 @@ class GameManager:
                 game_running = False
 
 
-game = GameManager(1000, 1000, 5, 100)
+game = GameManager(1000, 1000, 5)
