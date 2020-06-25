@@ -1,6 +1,6 @@
 import datetime
 import os
-from random import randint
+
 from Cities import City
 from Products import Products, CityProduct
 
@@ -22,8 +22,6 @@ class GameManager:
         Products.create_products()
         self.current_city = City.cities[0]
         self.date = datetime.datetime(1850, 4, 13)
-
-
 
     def firm_name(self):
         self.firm_name = input('What will you name your firm? \n')
@@ -96,6 +94,11 @@ class GameManager:
             self.cash = self.cash - self.cost
             self.shiphold = self.shiphold - int(quantity)
 
+    def debt_interest(self):
+        interest_rate = 25 * self.debt // 100
+        self.debt = self.debt + interest_rate
+        return self.debt
+
     def check_freespace_in_shiphold(self, quantity):
         if self.current_shiphold + int(quantity) <= self.shiphold:
             return quantity
@@ -149,10 +152,11 @@ class GameManager:
             else:
                 print('WHAT WILL YOU CHOSE NEXT?\nL)eave Port\nS)ell\nB)uy\nT)ransfer Bank\nQ)uit')
             print(MENU_SEPARATOR)
-            print('New prices available{}'.format(MENU_SEPARATOR))
+            print('New prices available{}. Check the Market'.format(MENU_SEPARATOR))
             new_option = input('enter the next step of your journey\n')
             if new_option == 'L'.lower():
                 game.current_city, game.date = self.leave_port(City.cities, game.date)
+                self.debt_interest()
                 print('LEAVING PORT')
             elif new_option == 'S'.lower():
                 self.sell()
