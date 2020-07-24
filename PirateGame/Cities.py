@@ -1,8 +1,3 @@
-import random
-
-from Products import Products
-
-
 class City:
     cities = []
 
@@ -10,7 +5,8 @@ class City:
         self.name = name
         self.has_bank = has_bank
         self.has_warehouse = has_warehouse
-        # City.cities.update({'name': self.name, 'has_bank': self.has_bank, 'has_warehouse': self.has_warehouse})
+        self.warehouse = 10000
+
 
     @classmethod
     def create_cities(cls):
@@ -19,5 +15,3 @@ class City:
         cls.cities.append(City('>Taipei<', False, False))
 
 
-
-# City.create_cities()
