@@ -1,6 +1,6 @@
 import datetime
 import os
-
+from Pirate_encounters import Pirate
 from Cities import City
 from Products import Products, CityProduct
 
@@ -18,10 +18,12 @@ class GameManager:
         self.cost = 0
         self.shiphold = 60
         self.current_shiphold = 0
+        self.ship_health = 100
         City.create_cities()
         Products.create_products()
         self.current_city = City.cities[0]
         self.date = datetime.datetime(1850, 4, 13)
+        self.storage = self.current_city.warehouse
 
     def money_lender(self):
         if game.current_city == City.cities[0]:
@@ -53,7 +55,6 @@ class GameManager:
 
     def sell(self):
         sell_selection = input('what would you like to sell?1- {} or C)ancel\n'.format(str(len(Products.products))))
-
         if sell_selection == 'C':
             return
         product_to_sell = Products.products[int(sell_selection) - 1]
@@ -130,13 +131,11 @@ class GameManager:
         return balance
 
     def transfer_warehouse(self):
-        pass
+        choice = input('How many pieces would you like to transfer?')
+        self.storage = self.storage - int(choice)
 
     def visit_bank(self):
         pass
-
-    # def pirate_bribe(self):
-    #     if new_option == 'L' and
 
     def StartUp(self):
         game_running = True
@@ -152,22 +151,25 @@ class GameManager:
             print('Date: {:%B %d, %Y}'.format(game.date))
             print(game.current_city.name)
             print('cash: {}\ndebt: {}\nguns: {}'.format(game.cash, game.debt, game.guns))
+            print('Warehouse: {}'.format(game.storage))
             print('Hold: {}'.format(self.shiphold))
             CityProduct.display_products_in_stock(CityProduct)
-
             print('City Goods')
             CityProduct.display_products_prices(CityProduct)
 
             print(MENU_SEPARATOR)
 
             has_bank = ''
-            if game.current_city.has_bank:
+            has_warehouse = ''
+            if game.current_city.has_bank and game.current_city.has_warehouse:
                 has_bank = 'V)isit Bank'
-                print('WHAT WILL YOU CHOSE NEXT?\nL)eave Port\nS)ell\n{}\nB)uy\nT)ransfer Bank\nQ)uit'.format(has_bank))
+                # has_warehouse = 'T)ransfer Warehouse'
+                print('WHAT WILL YOU CHOSE NEXT?\nL)eave Port\nS)ell\n{}\nT)ransfer Bank\nB)uy\nQ)uit'.format(has_bank))
             else:
-                print('WHAT WILL YOU CHOSE NEXT?\nL)eave Port\nS)ell\nB)uy\nT)ransfer Bank\nQ)uit')
+                print('WHAT WILL YOU CHOSE NEXT?\nL)eave Port\nS)ell\nB)uy\nQ)uit')
             print(MENU_SEPARATOR)
             print('New prices available{}. Check the Market'.format(MENU_SEPARATOR))
+
             new_option = input('enter the next step of your journey\n')
 
             if new_option == 'L'.lower():
@@ -175,14 +177,14 @@ class GameManager:
                 self.debt_interest()
                 self.money_lender()
                 print('LEAVING PORT')
+                Pirate(self)
             elif new_option == 'S'.lower():
                 self.sell()
             elif new_option == 'B'.lower():
                 self.buy()
-                # self.account_withdrawl()
             elif new_option == 'V'.lower() and game.current_city.has_bank:
                 self.visit_bank()
-            elif new_option == 'T'.lower():
+            elif new_option == 'T'.lower() and game.current_city.has_warehouse:
                 self.transfer_warehouse()
             elif new_option == 'Q'.lower():
                 print('See you around')
