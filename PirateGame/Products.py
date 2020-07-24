@@ -12,7 +12,7 @@ class Products:
         self.maxprice = maxprice
         self.price = randint(self.minprice, self.maxprice)
         self.product_quantity = 0
-        self.warehouse = 10000
+
         # Products.products.append(self)
 
     @classmethod
@@ -47,5 +47,4 @@ class CityProduct(Products):
         for product in self.products:
             print('    {} {}-- Stock: {}'.format(i, product.name, product.product_quantity))
             i += 1
-
 

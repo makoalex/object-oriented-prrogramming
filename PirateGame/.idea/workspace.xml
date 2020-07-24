@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="11cff08c-71df-4968-abdf-742240d7995c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/PirateGame.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PirateGame.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cities.py" beforeDir="false" afterPath="$PROJECT_DIR$/Cities.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Products.py" beforeDir="false" afterPath="$PROJECT_DIR$/Products.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/game_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game_02_content.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,7 +18,7 @@
   <component name="ProjectId" id="1dRRpEoq5BAAQQ9RYN5CJFhBxbI" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../SecondCourse" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -95,6 +93,28 @@
       <option name="presentableId" value="Default" />
       <updated>1592386099937</updated>
     </task>
+    <task id="LOCAL-00001" summary="adding a warehouse option and pirate encounter">
+      <created>1595591145375</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1595591145375</updated>
+    </task>
+    <task id="LOCAL-00002" summary="creating a Pirate class to the game">
+      <created>1595591179603</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1595591179603</updated>
+    </task>
+    <task id="LOCAL-00003" summary="modifying for the warehouse option">
+      <created>1595591211877</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1595591211877</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -102,10 +122,18 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="adding a warehouse option and pirate encounter" />
+    <MESSAGE value="creating a Pirate class to the game" />
+    <MESSAGE value="modifying for the warehouse option" />
+    <option name="LAST_COMMIT_MESSAGE" value="modifying for the warehouse option" />
   </component>
 </project>
